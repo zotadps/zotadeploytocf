@@ -1,7 +1,6 @@
 name: Deploy to cf
 
-on:  
-  push:
+on:    
   workflow_call:
 
 jobs:
@@ -10,8 +9,9 @@ jobs:
     name: Deploy
     steps:
       - uses: actions/checkout@v3
-      - name: Print info
+      - name: Print branch info
         run: echo running on branch ${GITHUB_REF##*/}
+      - name: Print repo info
         run: echo repository name ${{ github.event.repository.name }}
       - name: Publish
         uses: cloudflare/wrangler-action@2.0.0
