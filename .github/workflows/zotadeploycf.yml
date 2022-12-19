@@ -2,10 +2,9 @@ name: DeploytoCF
 
 on:    
   workflow_call:
-      inputs:
-        token:
+      secrets:
+        CF_API_KEY:
           required: true
-          type: string
 
 jobs:
   deploy:
@@ -20,5 +19,5 @@ jobs:
       - name: Publish
         uses: cloudflare/wrangler-action@2.0.0
         with:
-          apiToken: ${{ inputs.token }}
+          apiToken: ${{ secrets.CF_API_KEY }}
           command: pages publish . --project-name=${{ github.event.repository.name }} --branch=${GITHUB_REF##*/}
